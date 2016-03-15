@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.bugtags.library.plugin'
+
+def BOOLEAN = 'boolean'
+def STRING = 'String'
+def INT = 'int'
+def TRUE = 'true'
+def FALSE = 'false'
+
+def GIT_SHA = 'GIT_SHA'
+def BUILD_TIME = 'BUILD_TIME'
+
+def CONNECTION_TIMEOUT = 'CONNECTION_TIMEOUT'
+def REST_ENDPOINT = 'REST_ENDPOINT'
+
+
+android {
+
+    publishNonDefault true
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion "${rootProject.ext.buildToolsVersion}"
+
+    defaultConfig {
+        applicationId "com.ep.joy.mybaseapp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        buildConfigField STRING, GIT_SHA, "\"${rootProject.ext.gitSha}\""
+        buildConfigField STRING, BUILD_TIME, "\"${rootProject.ext.buildTime}\""
+        buildConfigField INT, CONNECTION_TIMEOUT, '2000'
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../distribution/debug.keystore')
+        }
+        release {
+            keyAlias ''
+            keyPassword ''
+            storeFile file('../distribution/release.jks')
+            storePassword ''
+        }
+    }
+    productFlavors {
+        dev {
+            applicationId "${project.android.defaultConfig.applicationId}.dev"
+            versionName "${project.android.defaultConfig.versionName}-beta-${rootProject.ext.gitSha}"
+            buildConfigField STRING, REST_ENDPOINT, '""'
+        }
+        prod {
+            applicationId project.android.defaultConfig.applicationId
+            buildConfigField STRING, REST_ENDPOINT, '""'
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
+            versionNameSuffix "-debug"
+        }
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            debuggable false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    //google
+    compile 'com.google.code.gson:gson:2.4'
+
+    //supportLib
+    compile rootProject.ext.supportLib
+    compile rootProject.ext.supportLibAppCompat
+    compile rootProject.ext.supportLibDesign
+    compile rootProject.ext.supportLibRecyclerview
+    compile rootProject.ext.supportLibCardview
+
+    //img
+    compile "com.github.bumptech.glide:glide:${rootProject.ext.glideVersion}"
+    //facebook
+    compile "com.facebook.stetho:stetho:${rootProject.ext.stethoVersion}"
+    compile "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttpVersion}"
+    compile 'com.bugtags.library:bugtags-lib:1.2.0'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.2@aar') {
+        transitive = true
+    }
+
+    compile project(':HttpWrapper')
+}
+
+
+bugtags {
+    appKey "daf756fd3bc68a71cb8985d33899601f"  //这里是你的 appKey
+    appSecret "6363fea52ecc935a941dba701920dcdb"    //这里是你的 appSecret，管理员在设置页可以查看
+
+    trackingNetworkEnabled true //开启网络请求跟踪功能(企业版)
+}
