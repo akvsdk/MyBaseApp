@@ -82,7 +82,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //google
     compile 'com.google.code.gson:gson:2.4'
-
+    //logcat
+    compile 'com.jiongbull:jlog:1.0.5'
     //supportLib
     compile rootProject.ext.supportLib
     compile rootProject.ext.supportLibAppCompat
