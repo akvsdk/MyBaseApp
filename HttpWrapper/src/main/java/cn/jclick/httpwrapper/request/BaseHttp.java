@@ -39,5 +39,17 @@ public class BaseHttp extends HttpRequestAgent {
         getInstance().executeRequest(params, listener);
     }
 
+    public static void post(String url, Map<String, String> map, ObjectCallback<?> listener, RequestConfig.HttpCacheMode httpCacheMode) {
+        requestParam.clear();
+        if (null != map) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                requestParam.put(entry.getKey(), entry.getValue());
+            }
+        }
+        RequestParams params = new RequestParams.Builder().requestParams(requestParam).url(url)
+                .cacheMode(httpCacheMode)
+                .post().build();
+        getInstance().executeRequest(params, listener);
+    }
 
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.jiongbull.jlog.JLog;
 
 import cn.jclick.httpwrapper.request.HttpRequestAgent;
 
@@ -29,6 +30,7 @@ public abstract class ObjectCallback<T> extends Callback {
                 return false;
             }
             ResponseData responseData = convertCache(data);
+            JLog.json(data.getData());
             T result = processData(data.getData());
             //  T result = processJson(data.getData());
             if (result == null) {
@@ -48,6 +50,7 @@ public abstract class ObjectCallback<T> extends Callback {
         T result = null;
         try {
             // result = processJson(string(bytes));
+            JLog.json(string(bytes));
             result = processData(string(bytes));
         } catch (Exception e) {
             responseData.setParseSuccess(false);
@@ -68,8 +71,9 @@ public abstract class ObjectCallback<T> extends Callback {
         if (this.typeReference != null) {
             result = JSON.parseObject(data, this.typeReference);
         } else {
-            result = com.alibaba.fastjson.JSONObject.parseObject(data, new TypeReference<T>() {});
-           // result = JSON.parseObject(data,new TypeReference<T>(){});
+            result = com.alibaba.fastjson.JSONObject.parseObject(data, new TypeReference<T>() {
+            });
+            // result = JSON.parseObject(data,new TypeReference<T>(){});
         }
         return result;
     }
