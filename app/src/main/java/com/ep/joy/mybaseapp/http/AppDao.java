@@ -1,8 +1,13 @@
 package com.ep.joy.mybaseapp.http;
 
 
+import com.ep.joy.mybaseapp.entity.User;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.jclick.httpwrapper.callback.MyCallBack;
+import cn.jclick.httpwrapper.request.BaseHttp;
 
 /**
  * author   Joy
@@ -31,7 +36,7 @@ public class AppDao {
     }
 
 
-//    public void getNewsList(ObjectCallback<NewBrand>,String url) {
+    //    public void getNewsList(ObjectCallback<NewBrand>,String url) {
 //        Map<String, String> map = createMap();
 //        map.put("newsTypeVal", "CC");
 //        RequestParams params = new RequestParams.Builder().requestParams(map).url(url).cacheMode(RequestConfig.HttpCacheMode.ALWAYS_CACHE).post().build();
@@ -39,7 +44,13 @@ public class AppDao {
 //        HttpRequestAgent.getInstance().(params, callback);
 //        Http.post("url", map, listener);
 //    }
-//
+    public void fuck(MyCallBack<User> callback) {
+        Map<String, String> map = createMap();
+        String gank = "http://120.25.0.216/userfindmacth.json";
+        map.put("pageNo", "1");
+        BaseHttp.post(gank, map, callback);
+    }
+
 //    public void gankIo(int index, int page, ObjectCallback<List<GanHuo>> listener) {
 //        String type = "all";
 //        String gank = "http://gank.avosapps.com/api/data/" + "Android" + "/30/" + "1";

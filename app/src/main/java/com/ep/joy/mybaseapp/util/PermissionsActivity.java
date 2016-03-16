@@ -13,7 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import com.mxst.car.simsclient.R;
+import com.ep.joy.mybaseapp.R;
 
 /**
  * 权限获取页面

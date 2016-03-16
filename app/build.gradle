@@ -34,13 +34,13 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('../distribution/debug.keystore')
+    //        storeFile file('../distribution/debug.keystore')
         }
         release {
-            keyAlias ''
-            keyPassword ''
-            storeFile file('../distribution/release.jks')
-            storePassword ''
+//            keyAlias ''
+//            keyPassword ''
+//            storeFile file('../distribution/release.jks')
+//            storePassword ''
         }
     }
     productFlavors {

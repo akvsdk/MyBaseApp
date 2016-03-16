@@ -15,7 +15,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Bugtags.start("ea43ad8098f47ba92ed6b2f010efc63b", this, Bugtags.BTGInvocationEventBubble);
+        Bugtags.start("daf756fd3bc68a71cb8985d33899601f", this, Bugtags.BTGInvocationEventBubble);
 
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
