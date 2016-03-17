@@ -30,7 +30,7 @@ import cn.jclick.httpwrapper.request.RequestParams;
 public class BaseActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 0; // 请求码
-
+    public static final long CACHE_TIME = 10;
     static final String[] PERMISSIONS = new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
@@ -42,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         RequestConfig config = new RequestConfig.Builder(this).logEnable(true).cacheMode(RequestConfig.HttpCacheMode.ALWAYS_CACHE)
-                .cacheTimeInSeconds(10).connectionTimeOut(30 * 1000).addInterceptor(new HandlerInterceptor() {
+                .cacheTimeInSeconds(CACHE_TIME).connectionTimeOut(30 * 1000).addInterceptor(new HandlerInterceptor() {
                     @Override
                     public boolean preHandler(RequestParams params) {
                         //TODO 请求前的拦截器

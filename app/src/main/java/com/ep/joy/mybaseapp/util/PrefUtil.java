@@ -38,8 +38,19 @@ public final class PrefUtil {
     prefs.edit().putBoolean(key, value).apply();
   }
 
+  public static long getLong(Context context, String key, final long defaultValue) {
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    return prefs.getLong(key, defaultValue);
+  }
+
+  public static void putLong(Context context, String key, long value) {
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    prefs.edit().putLong(key, value).apply();
+  }
+
   public static void remove(Context context, String key) {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
     prefs.edit().remove(key).apply();
   }
+
 }
