@@ -34,7 +34,7 @@ android {
     }
     signingConfigs {
         debug {
-    //        storeFile file('../distribution/debug.keystore')
+            //        storeFile file('../distribution/debug.keystore')
         }
         release {
 //            keyAlias ''
@@ -65,7 +65,7 @@ android {
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
-            debuggable false
+            debuggable true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -84,6 +84,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     //logcat
     compile 'com.jiongbull:jlog:1.0.5'
+    //底部导航
+    compile 'com.roughike:bottom-bar:1.0.4'
     //supportLib
     compile rootProject.ext.supportLib
     compile rootProject.ext.supportLibAppCompat

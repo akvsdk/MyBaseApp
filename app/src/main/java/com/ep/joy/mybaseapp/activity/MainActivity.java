@@ -10,6 +10,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.ep.joy.mybaseapp.R;
+import com.ep.joy.mybaseapp.base.BaseActivity;
 import com.ep.joy.mybaseapp.entity.Tab;
 import com.ep.joy.mybaseapp.fragment.FindFragment;
 import com.ep.joy.mybaseapp.fragment.HomeFragment;
@@ -24,31 +25,16 @@ public class MainActivity extends BaseActivity {
     private FragmentTabHost mTabhost;
     private ArrayList<Tab> tabs = new ArrayList<>(4);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        inittab();
 
-//        mTextView = (TextView) findViewById(R.id.tv);
-//        mImageView = (ImageView) findViewById(R.id.img);
-//        mTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AppDao.getInstance().fuck(new MyCallBack<User>(MainActivity.this, new TypeReference<User>() {
-//                }) {
-//                    @Override
-//                    protected void onSuccess(User result) {
-//                        mTextView.setText(result.getList().get(0).getReleaseName());
-//                    }
-//
-//                    @Override
-//                    protected void onCache(User result) {
-//
-//                    }
-//                });
-//            }
-//        });
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+        inittab();
     }
 
     private void inittab() {
@@ -75,7 +61,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private View buildTab(Tab tab) {
         View view = LayoutInflater.from(this).inflate(R.layout.tab_indicator, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.tab_icon);
