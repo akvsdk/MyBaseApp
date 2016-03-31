@@ -1,11 +1,13 @@
 package com.ep.joy.mybaseapp.application;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.bugtags.library.Bugtags;
 import com.ep.joy.mybaseapp.BuildConfig;
 import com.facebook.stetho.Stetho;
-import com.jiongbull.jlog.JLog;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.Settings;
 
 /**
  * author   Joy
@@ -22,8 +24,13 @@ public class App extends Application {
 //        BTGInvocationEventShake   // 通过摇一摇呼出 Bugtags
 //
 //        BTGInvocationEventBubble  // 通过悬浮小球呼出 Bugtags
-        JLog.init(this)
-                .setDebug(BuildConfig.DEBUG);
+        Logger.initialize(
+                Settings.getInstance()
+                        .isShowMethodLink(true)
+                        .isShowThreadInfo(false)
+                        .setMethodOffset(0)
+                        .setLogPriority(BuildConfig.DEBUG ? Log.VERBOSE : Log.ASSERT)
+        );
 
         Bugtags.start("daf756fd3bc68a71cb8985d33899601f", this, Bugtags.BTGInvocationEventBubble);
         Stetho.initialize(

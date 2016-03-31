@@ -83,9 +83,11 @@ dependencies {
     //google
     compile 'com.google.code.gson:gson:2.4'
     //logcat
-    compile 'com.jiongbull:jlog:1.0.5'
+    compile 'com.github.tianzhijiexian:logger:1.1.7'
     //底部导航
-    compile 'com.roughike:bottom-bar:1.0.4'
+    compile 'com.roughike:bottom-bar:1.2.4'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     //supportLib
     compile rootProject.ext.supportLib
     compile rootProject.ext.supportLibAppCompat
@@ -111,5 +113,5 @@ bugtags {
     appKey "daf756fd3bc68a71cb8985d33899601f"  //这里是你的 appKey
     appSecret "6363fea52ecc935a941dba701920dcdb"    //这里是你的 appSecret，管理员在设置页可以查看
 
-    trackingNetworkEnabled true //开启网络请求跟踪功能(企业版)
+    trackingNetworkEnabled false //开启网络请求跟踪功能(企业版)
 }

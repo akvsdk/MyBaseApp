@@ -2,12 +2,13 @@ package com.ep.joy.mybaseapp.activity;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ep.joy.mybaseapp.R;
 import com.ep.joy.mybaseapp.base.BaseActivity;
@@ -24,7 +25,7 @@ public class MainActivity extends BaseActivity {
 
     private FragmentTabHost mTabhost;
     private ArrayList<Tab> tabs = new ArrayList<>(4);
-
+    private long exitTime;
 
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        exitTime = System.currentTimeMillis();
         inittab();
     }
 
@@ -53,6 +55,7 @@ public class MainActivity extends BaseActivity {
             tabspec.setIndicator(buildTab(tab));
             mTabhost.addTab(tabspec, tab.getFragment(), null);
         }
+        mTabhost.getTabWidget().setDividerDrawable(null); // 去掉分割线
         mTabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -69,5 +72,20 @@ public class MainActivity extends BaseActivity {
         imageView.setBackground(getDrawable(tab.getImg()));
         textView.setText(tab.getTitle());
         return view;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -19,7 +19,7 @@ public class AppDao {
     private static AppDao instance;
 
 
-    public static AppDao getInstance() {
+    public static synchronized AppDao getInstance() {
         if (instance == null) {
             instance = new AppDao();
         }

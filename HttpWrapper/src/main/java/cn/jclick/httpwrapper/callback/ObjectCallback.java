@@ -50,7 +50,6 @@ public abstract class ObjectCallback<T> extends Callback {
         T result = null;
         try {
             // result = processJson(string(bytes));
-            JLog.json(string(bytes));
             result = processData(string(bytes));
         } catch (Exception e) {
             responseData.setParseSuccess(false);

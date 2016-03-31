@@ -14,6 +14,8 @@ import com.alibaba.fastjson.TypeReference;
 import com.ep.joy.mybaseapp.R;
 import com.ep.joy.mybaseapp.entity.User;
 import com.ep.joy.mybaseapp.http.AppDao;
+import com.ep.joy.mybaseapp.util.LogUtils;
+import com.orhanobut.logger.Logger;
 
 import cn.jclick.httpwrapper.callback.MyCallBack;
 
@@ -22,11 +24,20 @@ public class HomeFragment extends Fragment {
 
     private TextView homeTv;
     CoordinatorLayout container;
+    private View mViewContent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, null);
+        if (mViewContent == null) {
+            mViewContent = inflater.inflate(R.layout.fragment_home, container, false);
+        }
+        // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
+        ViewGroup parent = (ViewGroup) mViewContent.getParent();
+        if (parent != null) {
+            parent.removeView(mViewContent);
+        }
+        return mViewContent;
     }
 
     @Override
@@ -41,6 +52,8 @@ public class HomeFragment extends Fragment {
                                           }) {
                                               @Override
                                               protected void onSuccess(User result) {
+                                                  Logger.object(result.getList().get(0));
+                                                  LogUtils.d("1111");
                                                   homeTv.setText(result.getList().get(0).getReleaseName());
                                               }
 
