@@ -1,42 +1,39 @@
 package com.ep.joy.mybaseapp.fragment;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.ep.joy.mybaseapp.R;
+import com.ep.joy.mybaseapp.base.BaseFragment;
 
 
-public class NewsFragment extends Fragment {
+public class NewsFragment extends BaseFragment {
 
-
-    private View mViewContent;
+    private FrameLayout mFrameLayout;
+    private FloatingActionButton mButton;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (mViewContent == null) {
-            mViewContent = inflater.inflate(R.layout.fragment_news, container, false);
-        }
-        // 缓存View判断是否含有parent, 如果有需要从parent删除, 否则发生已有parent的错误.
-        ViewGroup parent = (ViewGroup) mViewContent.getParent();
-        if (parent != null) {
-            parent.removeView(mViewContent);
-        }
-        return mViewContent;
-
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_news;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-
+    protected void initView(View view) {
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.content);
+        mButton = (FloatingActionButton) view.findViewById(R.id.fab);
     }
+
+    @Override
+    protected void initData() {
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(mFrameLayout, "wft", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 }
