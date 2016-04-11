@@ -26,6 +26,7 @@ public class Main extends BaseActivity {
     protected void getsavedInstanceState(Bundle savedInstanceState) {
         super.getsavedInstanceState(savedInstanceState);
         mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.noTopOffset();
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.ep.joy.mybaseapp.base.BaseFragment;
 import com.ep.joy.mybaseapp.entity.User;
 import com.ep.joy.mybaseapp.http.AppDao;
 import com.ep.joy.mybaseapp.util.LogUtils;
+import com.ep.joy.mybaseapp.weight.LoadingLayout;
 import com.orhanobut.logger.Logger;
 
 import cn.jclick.httpwrapper.callback.MyCallBack;
@@ -21,6 +22,7 @@ public class HomeFragment extends BaseFragment {
     private TextView homeTv;
     CoordinatorLayout container;
     private View mViewContent;
+    private LoadingLayout mLoadingLayout;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -31,6 +33,14 @@ public class HomeFragment extends BaseFragment {
     protected void initView(View view) {
         container = (CoordinatorLayout) view.findViewById(R.id.container);
         homeTv = (TextView) view.findViewById(R.id.home_tv);
+        mLoadingLayout = (LoadingLayout) view.findViewById(R.id.loading);
+        mLoadingLayout.showError();
+        mLoadingLayout.setOnRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoadingLayout.showContent();
+            }
+        });
         homeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
