@@ -6,6 +6,7 @@ import com.ep.joy.mybaseapp.entity.User;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jclick.httpwrapper.callback.MyBaseCallBack;
 import cn.jclick.httpwrapper.callback.MyCallBack;
 import cn.jclick.httpwrapper.request.BaseHttp;
 
@@ -45,6 +46,13 @@ public class AppDao {
 //        Http.post("url", map, listener);
 //    }
     public void fuck(MyCallBack<User> callback) {
+        Map<String, String> map = createMap();
+        String gank = "http://120.25.0.216/userfindmacth.json";
+        map.put("pageNo", "1");
+        BaseHttp.post(gank, map, callback);
+    }
+
+    public void fuck(MyBaseCallBack<User> callback) {
         Map<String, String> map = createMap();
         String gank = "http://120.25.0.216/userfindmacth.json";
         map.put("pageNo", "1");

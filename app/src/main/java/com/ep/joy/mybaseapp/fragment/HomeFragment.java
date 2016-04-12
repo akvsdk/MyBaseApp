@@ -15,7 +15,7 @@ import com.ep.joy.mybaseapp.util.LogUtils;
 import com.ep.joy.mybaseapp.weight.LoadingLayout;
 import com.orhanobut.logger.Logger;
 
-import cn.jclick.httpwrapper.callback.MyCallBack;
+import cn.jclick.httpwrapper.callback.MyBaseCallBack;
 
 
 public class HomeFragment extends BaseFragment {
@@ -44,7 +44,7 @@ public class HomeFragment extends BaseFragment {
         homeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppDao.getInstance().fuck(new MyCallBack<User>(getActivity(), new TypeReference<User>() {
+                AppDao.getInstance().fuck(new MyBaseCallBack<User>(getActivity(), new TypeReference<User>() {
                 }) {
                     @Override
                     protected void onSuccess(User result) {

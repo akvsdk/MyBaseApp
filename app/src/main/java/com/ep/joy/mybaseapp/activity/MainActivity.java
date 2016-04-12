@@ -1,7 +1,7 @@
 package com.ep.joy.mybaseapp.activity;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,12 +64,12 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private View buildTab(Tab tab) {
         View view = LayoutInflater.from(this).inflate(R.layout.tab_indicator, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.tab_icon);
         TextView textView = (TextView) view.findViewById(R.id.tab_txt);
-        imageView.setBackground(getDrawable(tab.getImg()));
+        Drawable drawable = ContextCompat.getDrawable(this, tab.getImg());
+        imageView.setBackground(drawable);
         textView.setText(tab.getTitle());
         return view;
     }
