@@ -28,7 +28,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
-        buildConfigField STRING, GIT_SHA, "\"${rootProject.ext.gitSha}\""
+        //      buildConfigField STRING, GIT_SHA, "\"${rootProject.ext.gitSha}\""
         buildConfigField STRING, BUILD_TIME, "\"${rootProject.ext.buildTime}\""
         buildConfigField INT, CONNECTION_TIMEOUT, '2000'
     }
@@ -46,7 +46,7 @@ android {
     productFlavors {
         dev {
             applicationId "${project.android.defaultConfig.applicationId}.dev"
-            versionName "${project.android.defaultConfig.versionName}-beta-${rootProject.ext.gitSha}"
+        //    versionName "${project.android.defaultConfig.versionName}-beta-${rootProject.ext.gitSha}"
             buildConfigField STRING, REST_ENDPOINT, '""'
         }
         prod {
