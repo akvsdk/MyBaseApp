@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.Loading"/>
-
+        <activity android:name=".activity.AboutActivity"/>
     </application>
 
 </manifest>

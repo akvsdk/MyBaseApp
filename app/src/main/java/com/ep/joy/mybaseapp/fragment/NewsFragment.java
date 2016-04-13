@@ -1,7 +1,6 @@
 package com.ep.joy.mybaseapp.fragment;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -30,7 +29,7 @@ public class NewsFragment extends BaseFragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(mFrameLayout, "wft", Snackbar.LENGTH_SHORT).show();
+                showToast(mFrameLayout, "wtf");
             }
         });
     }

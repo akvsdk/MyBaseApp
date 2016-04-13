@@ -5,5 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bg">#FFFFFF</color>
     <color name="grey">#808080</color>
-
+    <color name="cardview_background">#FF424242</color>
+    <color name="background">#FFF5F5F5</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
 </resources>
