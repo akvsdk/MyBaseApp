@@ -52,7 +52,7 @@ public class Loading extends BaseLoadingActivity {
     }
 
     public void doHttp(View v) {
-        AppDao.getInstance().fuck(new MyCallBack<User>(new TypeReference<User>() {
+        AppDao.getInstance().fuck(1,new MyCallBack<User>(new TypeReference<User>() {
         }) {
             @Override
             protected void onSuccess(User result) {

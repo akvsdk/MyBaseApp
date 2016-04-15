@@ -31,4 +31,6 @@ public class AboutActivity extends BaseToolbarActivity {
         mTextView.setText("版本号" + BuildConfig.VERSION_CODE);
         mLayout.setTitle("关于");
     }
+
+
 }

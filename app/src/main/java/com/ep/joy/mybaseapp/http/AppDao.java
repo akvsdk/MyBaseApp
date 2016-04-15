@@ -45,10 +45,10 @@ public class AppDao {
 //        HttpRequestAgent.getInstance().(params, callback);
 //        Http.post("url", map, listener);
 //    }
-    public void fuck(MyCallBack<User> callback) {
+    public void fuck(int num, MyCallBack<User> callback) {
         Map<String, String> map = createMap();
         String gank = "http://120.25.0.216/userfindmacth.json";
-        map.put("pageNo", "1");
+        map.put("pageNo", num + "");
         BaseHttp.post(gank, map, callback);
     }
 

@@ -30,6 +30,7 @@ import cn.jclick.httpwrapper.request.RequestParams;
 public abstract class BaseActivity extends AppCompatActivity {
 
     public static final long CACHE_TIME = 10;
+    private RequestConfig config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,51 +41,53 @@ public abstract class BaseActivity extends AppCompatActivity {
             getBundleExtras(extras);
         }
 
-            if (getContentViewLayoutID() != 0) {
-                setContentView(getContentViewLayoutID());
-                getsavedInstanceState(savedInstanceState);
-                inithttp();
-            } else {
-                throw new IllegalArgumentException("You must return a right contentView layout resource Id");
-            }
+        if (getContentViewLayoutID() != 0) {
+            setContentView(getContentViewLayoutID());
+            getsavedInstanceState(savedInstanceState);
+            inithttp();
+        } else {
+            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
+        }
         initViewsAndEvents();
 
     }
 
 
     private void inithttp() {
-        RequestConfig config = new RequestConfig.Builder(this).logEnable(true).cacheMode(RequestConfig.HttpCacheMode.ALWAYS_CACHE)
-                .cacheTimeInSeconds(CACHE_TIME).connectionTimeOut(30 * 1000).addInterceptor(new HandlerInterceptor() {
-                    @Override
-                    public boolean preHandler(RequestParams params) {
-                        //TODO 请求前的拦截器
-                        return true;
+        if (config == null) {
+            config = new RequestConfig.Builder(this).logEnable(true).cacheMode(RequestConfig.HttpCacheMode.ALWAYS_CACHE)
+                    .cacheTimeInSeconds(CACHE_TIME).connectionTimeOut(30 * 1000).addInterceptor(new HandlerInterceptor() {
+                        @Override
+                        public boolean preHandler(RequestParams params) {
+                            //TODO 请求前的拦截器
+                            return true;
 
-                    }
+                        }
 
-                    @Override
-                    public void postSuccessHandler(final RequestParams params, final int statusCode, Map<String, List<String>> headers) {
-                        //TODO 请求成功的拦截器
+                        @Override
+                        public void postSuccessHandler(final RequestParams params, final int statusCode, Map<String, List<String>> headers) {
+                            //TODO 请求成功的拦截器
 
-                    }
+                        }
 
-                    @Override
-                    public void postFailedHandler(IOException exception) {
-                        //TODO 请求失败的拦截器
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(BaseActivity.this, "o(︶︿︶)o 敢不敢不坑爹", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        @Override
+                        public void postFailedHandler(IOException exception) {
+                            //TODO 请求失败的拦截器
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(BaseActivity.this, "o(︶︿︶)o 敢不敢不坑爹", Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
-                    }
+                        }
 
-                    @Override
-                    public void afterCompletion(RequestParams params, ResponseData<String> responseData) {
-                        //TODO 请求逻辑处理完毕的回调
-                    }
-                }).build();
+                        @Override
+                        public void afterCompletion(RequestParams params, ResponseData<String> responseData) {
+                            //TODO 请求逻辑处理完毕的回调
+                        }
+                    }).build();
+        }
 
         HttpRequestAgent.getInstance().init(config);
     }

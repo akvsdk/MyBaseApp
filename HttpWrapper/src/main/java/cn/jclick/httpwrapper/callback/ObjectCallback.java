@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.jiongbull.jlog.JLog;
 
 import cn.jclick.httpwrapper.request.HttpRequestAgent;
 
@@ -30,7 +29,6 @@ public abstract class ObjectCallback<T> extends Callback {
                 return false;
             }
             ResponseData responseData = convertCache(data);
-            JLog.json(data.getData());
             T result = processData(data.getData());
             //  T result = processJson(data.getData());
             if (result == null) {

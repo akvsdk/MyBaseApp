@@ -27,7 +27,7 @@ import cn.jclick.httpwrapper.request.RequestParams;
  * author   Joy
  * Date:  2016/3/15.
  * version:  V1.0
- * Description:
+ * Description: 折叠视图的toolbar
  */
 public abstract class BaseToolbarActivity extends AppCompatActivity {
 
