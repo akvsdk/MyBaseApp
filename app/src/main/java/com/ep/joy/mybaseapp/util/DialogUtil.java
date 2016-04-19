@@ -31,6 +31,17 @@ public final class DialogUtil {
                 .show();
     }
 
+    public static void showCustomDialog(Context context, int ResId) {
+        if (progressDialog != null) {
+            progressDialog.show();
+            return;
+        }
+        progressDialog
+                = new MaterialDialog.Builder(context)
+                .customView(ResId, false)
+                .show();
+    }
+
     public static void hideProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();

@@ -14,7 +14,10 @@ import com.ep.joy.mybaseapp.adapter.MyAdapter;
 import com.ep.joy.mybaseapp.base.BaseFragment;
 import com.ep.joy.mybaseapp.entity.User;
 import com.ep.joy.mybaseapp.http.AppDao;
+import com.ep.joy.mybaseapp.util.DialogUtil;
 import com.ep.joy.mybaseapp.weight.RefreshLayout;
+
+import org.byteam.superadapter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,12 @@ public class NewsFragment extends BaseFragment {
             mRecyclerView.setAdapter(mMyAdapter);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
+        mMyAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int viewType, int position) {
+                DialogUtil.showCustomDialog(getContext(), R.layout.loading_sun);
+            }
+        });
         refreshLayout.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
             @Override
             public void onRefreshing() {
