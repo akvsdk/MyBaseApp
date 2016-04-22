@@ -1,6 +1,7 @@
 package com.ep.joy.mybaseapp.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.bugtags.library.Bugtags;
@@ -8,6 +9,8 @@ import com.ep.joy.mybaseapp.BuildConfig;
 import com.facebook.stetho.Stetho;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.Settings;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * author   Joy
@@ -40,6 +43,17 @@ public class App extends Application {
                         .enableWebKitInspector(
                                 Stetho.defaultInspectorModulesProvider(this))
                         .build());
+        refWatcher = LeakCanary.install(this);//内存泄露检测
+    }
+
+    /**
+     * 内存泄露检测
+     */
+    private RefWatcher refWatcher;
+
+    public static RefWatcher getRefWatcher(Context context) {
+        App application = (App) context.getApplicationContext();
+        return application.refWatcher;
     }
 }
 

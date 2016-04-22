@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ep.joy.mybaseapp.R;
-import com.ep.joy.mybaseapp.activity.AboutActivity;
+import com.ep.joy.mybaseapp.activity.TestActivity;
 import com.ep.joy.mybaseapp.base.BaseFragment;
 
 
@@ -25,7 +25,7 @@ public class FindFragment extends BaseFragment {
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AboutActivity.class));
+                startActivity(new Intent(getActivity(), TestActivity.class));
             }
         });
     }

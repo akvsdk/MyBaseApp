@@ -98,6 +98,10 @@ dependencies {
     compile 'org.byteam.superadapter:superadapter:3.0.0-alpha1@aar'
    //通用adapter
 
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    //内存检测
 
     //supportLib
     compile rootProject.ext.supportLib

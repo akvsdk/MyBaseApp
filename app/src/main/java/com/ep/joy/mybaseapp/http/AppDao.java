@@ -1,6 +1,8 @@
 package com.ep.joy.mybaseapp.http;
 
 
+import com.ep.joy.mybaseapp.entity.News;
+import com.ep.joy.mybaseapp.entity.Result;
 import com.ep.joy.mybaseapp.entity.User;
 
 import java.util.HashMap;
@@ -58,6 +60,15 @@ public class AppDao {
         map.put("pageNo", "1");
         BaseHttp.post(gank, map, callback);
     }
+
+    public void getNews(MyCallBack<Result<News>> callback) {
+        Map<String, String> map = createMap();
+        String url = "http://222.177.210.200/supplier/news/getNewsList";
+        map.put("newsTypeVal", "CC");
+        map.put("page", "1");
+        BaseHttp.post(url, map, callback);
+    }
+
 
 //    public void gankIo(int index, int page, ObjectCallback<List<GanHuo>> listener) {
 //        String type = "all";

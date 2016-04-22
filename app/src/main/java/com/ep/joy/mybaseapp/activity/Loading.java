@@ -7,10 +7,10 @@ import android.widget.Toast;
 import com.alibaba.fastjson.TypeReference;
 import com.ep.joy.mybaseapp.R;
 import com.ep.joy.mybaseapp.base.BaseLoadingActivity;
-import com.ep.joy.mybaseapp.entity.User;
+import com.ep.joy.mybaseapp.entity.News;
+import com.ep.joy.mybaseapp.entity.Result;
 import com.ep.joy.mybaseapp.http.AppDao;
 
-import cn.jclick.httpwrapper.callback.MyBaseCallBack;
 import cn.jclick.httpwrapper.callback.MyCallBack;
 
 /**
@@ -35,35 +35,67 @@ public class Loading extends BaseLoadingActivity {
 
     @Override
     protected void doRefresh() {
-        AppDao.getInstance().fuck(new MyBaseCallBack<User>(this,new TypeReference<User>() {
+        AppDao.getInstance().getNews(new MyCallBack<Result<News>>(new TypeReference<Result<News>>() {
         }) {
-
             @Override
-            protected void onSuccess(User result) {
-                mTextView.setText(result.getList().get(0).getSignEndTime());
+            protected void onSuccess(Result<News> result) {
+                if (result.isSuccess()) {
+                    Toast.makeText(Loading.this, result.getRecord().getNewsList().get(0).getSubtitle(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            protected void onCache(User result) {
-
+            protected void onCache(Result<News> result) {
+                mTextView.setText(result.getRecord().getNewsList().get(0).getTitle());
             }
         });
+//        AppDao.getInstance().fuck(new MyBaseCallBack<User>(this, new TypeReference<User>() {
+//        }) {
+//
+//            @Override
+//            protected void onSuccess(User result) {
+//                mTextView.setText(result.getList().get(0).getSignEndTime());
+//            }
+//
+//            @Override
+//            protected void onCache(User result) {
+//
+//            }
+//        });
 
     }
 
+    //    public void doHttp(View v) {
+//        AppDao.getInstance().fuck(1,new MyCallBack<User>(new TypeReference<User>() {
+//        }) {
+//            @Override
+//            protected void onSuccess(User result) {
+//                Toast.makeText(Loading.this, result.getList().get(0).getReleaseName(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            protected void onCache(User result) {
+//
+//            }
+//        });
+//
+//    }
     public void doHttp(View v) {
-        AppDao.getInstance().fuck(1,new MyCallBack<User>(new TypeReference<User>() {
+        AppDao.getInstance().getNews(new MyCallBack<Result<News>>(new TypeReference<Result<News>>() {
         }) {
             @Override
-            protected void onSuccess(User result) {
-                Toast.makeText(Loading.this, result.getList().get(0).getReleaseName(), Toast.LENGTH_SHORT).show();
+            protected void onSuccess(Result<News> result) {
+                if (result.isSuccess()) {
+                    Toast.makeText(Loading.this, result.getRecord().getNewsList().get(0).getSubtitle(), Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(Loading.this, result.getMsg(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            protected void onCache(User result) {
-
+            protected void onCache(Result<News> result) {
+                mTextView.setText(result.getRecord().getNewsList().get(0).getTitle());
             }
         });
-
     }
 }

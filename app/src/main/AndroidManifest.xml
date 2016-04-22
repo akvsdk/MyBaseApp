@@ -29,6 +29,7 @@
             android:launchMode="singleTask"/>
         <activity android:name=".activity.Loading"/>
         <activity android:name=".activity.AboutActivity"/>
+        <activity android:name=".activity.TestActivity"/>
     </application>
 
 </manifest>

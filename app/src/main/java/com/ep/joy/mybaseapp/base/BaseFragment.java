@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ep.joy.mybaseapp.application.App;
+import com.squareup.leakcanary.RefWatcher;
+
 /**
  * author   Joy
  * Date:  2016/4/7.
@@ -56,6 +59,13 @@ public abstract class BaseFragment extends Fragment {
         if (null != msg && !TextUtils.isEmpty(msg)) {
             Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(this);//内存泄露检测
     }
 
     protected abstract int getContentViewLayoutID();
