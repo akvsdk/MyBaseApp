@@ -3,17 +3,21 @@
     <item
         android:id="@+id/home_bottomBar"
         android:icon="@drawable/selector_icon_home"
+        android:color="@color/colorPrimary"
         android:title="@string/home"/>
     <item
         android:id="@+id/find_bottomBar"
+        android:color="@color/colorPrimary"
         android:icon="@drawable/selector_icon_category"
         android:title="@string/find"/>
     <item
         android:id="@+id/news_bottomBar"
+        android:color="@color/colorPrimary"
         android:icon="@drawable/selector_icon_hot"
         android:title="@string/news"/>
     <item
         android:id="@+id/mine_bottomBar"
+        android:color="@color/colorPrimary"
         android:icon="@drawable/selector_icon_mine"
         android:title="@string/mine"/>
 </menu>

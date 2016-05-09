@@ -5,7 +5,7 @@ import android.widget.ImageView;
 
 import com.ep.joy.mybaseapp.R;
 import com.ep.joy.mybaseapp.entity.User;
-import com.ep.joy.mybaseapp.util.MyUtil;
+import com.ep.joy.mybaseapp.http.GlideProxy;
 
 import org.byteam.superadapter.SuperAdapter;
 import org.byteam.superadapter.internal.SuperViewHolder;
@@ -31,7 +31,7 @@ public class MyAdapter extends SuperAdapter<User.ListEntity> {
         holder.setText(R.id.item_single_tv, item.getMacthName());
         String url = "http://img3.imgtn.bdimg.com/it/u=2790453178,2941744905&fm=23&gp=0.jpg";
         ImageView img = holder.getView(R.id.item_img);
-        MyUtil.ShowImage(mContext, img, url);
+        GlideProxy.getInstance().loadImage(mContext, url, img);
 
     }
 }

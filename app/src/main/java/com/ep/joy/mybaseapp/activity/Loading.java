@@ -38,15 +38,10 @@ public class Loading extends BaseLoadingActivity {
         AppDao.getInstance().getNews(new MyCallBack<Result<News>>(new TypeReference<Result<News>>() {
         }) {
             @Override
-            protected void onSuccess(Result<News> result) {
+            protected void onSuccess(Result<News> result, boolean isCache) {
                 if (result.isSuccess()) {
                     Toast.makeText(Loading.this, result.getRecord().getNewsList().get(0).getSubtitle(), Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            protected void onCache(Result<News> result) {
-                mTextView.setText(result.getRecord().getNewsList().get(0).getTitle());
             }
         });
 //        AppDao.getInstance().fuck(new MyBaseCallBack<User>(this, new TypeReference<User>() {
@@ -84,17 +79,8 @@ public class Loading extends BaseLoadingActivity {
         AppDao.getInstance().getNews(new MyCallBack<Result<News>>(new TypeReference<Result<News>>() {
         }) {
             @Override
-            protected void onSuccess(Result<News> result) {
-                if (result.isSuccess()) {
-                    Toast.makeText(Loading.this, result.getRecord().getNewsList().get(0).getSubtitle(), Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(Loading.this, result.getMsg(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            protected void onCache(Result<News> result) {
-                mTextView.setText(result.getRecord().getNewsList().get(0).getTitle());
+            protected void onSuccess(Result<News> result, boolean isCache) {
+                Toast.makeText(Loading.this, result.getRecord().getNewsList().get(0).getSubtitle(), Toast.LENGTH_SHORT).show();
             }
         });
     }

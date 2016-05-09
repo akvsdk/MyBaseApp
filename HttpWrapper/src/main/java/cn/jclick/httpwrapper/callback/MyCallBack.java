@@ -25,18 +25,14 @@ public abstract class MyCallBack<T> extends ObjectCallback<T> {
         if (responseData.isSuccess() && responseData.isParseSuccess()) {
 
             T result = responseData.getData();
-            if (responseData.isFromCache()) {
-                onCache(result);
-            } else {
-                onSuccess(result);
-            }
+            onSuccess(result, responseData.isFromCache());
+
         } else {
 
             // Toast.makeText(context, responseData.getDescription(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    protected abstract void onSuccess(T result);
+    protected abstract void onSuccess(T result, boolean isCache);
 
-    protected abstract void onCache(T result);
 }

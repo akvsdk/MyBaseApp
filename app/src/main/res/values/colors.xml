@@ -9,4 +9,7 @@
     <color name="background">#FFF5F5F5</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
+    <color name="white">#FFFFFF</color>
+    <color name="material_white70">#b2FFFFFF</color>
+    <color name="material_pink_a200">#ff80ab</color>
 </resources>

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 
 import com.ep.joy.mybaseapp.R;
 import com.ep.joy.mybaseapp.base.BaseActivity;
@@ -13,8 +12,8 @@ import com.ep.joy.mybaseapp.fragment.FindFragment;
 import com.ep.joy.mybaseapp.fragment.HomeFragment;
 import com.ep.joy.mybaseapp.fragment.MineFragment;
 import com.ep.joy.mybaseapp.fragment.NewsFragment;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
+
+import it.sephiroth.android.library.bottomnavigation.BottomNavigation;
 
 /**
  * author   Joy
@@ -23,14 +22,52 @@ import com.roughike.bottombar.OnMenuTabClickListener;
  * Description:
  */
 public class Main extends BaseActivity {
-    private BottomBar mBottomBar;
+    // private BottomBar mBottomBar;
     private Fragment currentFragment;
+    private BottomNavigation mBottomNavigation;
 
     @Override
     protected void getsavedInstanceState(Bundle savedInstanceState) {
         super.getsavedInstanceState(savedInstanceState);
-        mBottomBar = BottomBar.attach(this, savedInstanceState);
-        mBottomBar.noTopOffset();
+        if (null == savedInstanceState) {
+            mBottomNavigation.setDefaultSelectedIndex(0);
+            //// TODO: 2016/4/27
+        }
+
+
+    }
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+        mBottomNavigation = (BottomNavigation) findViewById(R.id.BottomNavigation);
+        if (null != mBottomNavigation) {
+            mBottomNavigation.setOnMenuItemClickListener(new BottomNavigation.OnMenuItemSelectionListener() {
+                @Override
+                public void onMenuItemSelect(@IdRes int i, int i1) {
+                    switch (i) {
+                        case R.id.home_bottomBar:
+                            switchContent(currentFragment, new HomeFragment());
+                            break;
+                        case R.id.find_bottomBar:
+                            switchContent(currentFragment, new FindFragment());
+                            break;
+                        case R.id.news_bottomBar:
+                            switchContent(currentFragment, new NewsFragment());
+                            break;
+                        case R.id.mine_bottomBar:
+                            switchContent(currentFragment, new MineFragment());
+                            break;
+                    }
+
+                }
+
+                @Override
+                public void onMenuItemReselect(@IdRes int i, int i1) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -42,52 +79,8 @@ public class Main extends BaseActivity {
     @Override
     protected void initViewsAndEvents() {
         switchFragment(new HomeFragment());
-        //   mBottomBar.setFragmentItems(getSupportFragmentManager(),R.id.fragmentContainer,new BottomBarFragment());
-        mBottomBar.setItemsFromMenu(R.menu.bottombar_menu, new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                switch (menuItemId) {
-                    case R.id.home_bottomBar:
-                        switchContent(currentFragment, new HomeFragment());
-                        break;
-                    case R.id.find_bottomBar:
-                        switchContent(currentFragment, new FindFragment());
-                        break;
-                    case R.id.news_bottomBar:
-                        switchContent(currentFragment, new NewsFragment());
-                        break;
-                    case R.id.mine_bottomBar:
-                        switchContent(currentFragment, new MineFragment());
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-            }
-        });
-
-        //  mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
-        // mBottomBar.mapColorForTab(1, 0xFF5D4037);
-        // mBottomBar.mapColorForTab(2, "#7B1FA2");
-        // mBottomBar.mapColorForTab(3, "#FF5252");
-        mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorPrimary));
-        mBottomBar.mapColorForTab(1, ContextCompat.getColor(this, R.color.colorPrimary));
-        mBottomBar.mapColorForTab(2, ContextCompat.getColor(this, R.color.colorPrimary));
-        mBottomBar.mapColorForTab(3, ContextCompat.getColor(this, R.color.colorPrimary));
-
     }
 
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-        mBottomBar.onSaveInstanceState(outState);
-    }
 
     private void switchFragment(Fragment fragment) {
         if (currentFragment == null || !fragment.getClass().getName().equals(currentFragment.getClass().getName())) {

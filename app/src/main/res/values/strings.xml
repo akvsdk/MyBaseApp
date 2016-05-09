@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MyBaseApp</string>
     <string name="home">主页</string>
     <string name="find">发现</string>
@@ -6,5 +6,6 @@
     <string name="mine">我的</string>
     <string name="message">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
     <string name="libs">compile \'com.google.code.gson:gson:2.4\'\n compile \'com.github.tianzhijiexian:logger:1.1.7\'\n compile \'com.roughike:bottom-bar:1.3.3\'\n compile \'com.github.ybq:Android-SpinKit:1.0.2\'\n SupportLib 23.2.1\n com.github.bumptech.glide:glide:3.7.1\n compile \'com.bugtags.library:bugtags-lib:1.2.3\'\nHttpWrapper</string>
+    <string name="bbn_badgeProvider" translatable="false" tools:ignore="UnusedResources">com.ep.joy.mybaseapp.weight.CustomBadgeProvider</string>
 
 </resources>

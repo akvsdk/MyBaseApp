@@ -112,16 +112,13 @@ public class NewsFragment extends BaseFragment {
         AppDao.getInstance().fuck(index, new MyCallBack<User>(new TypeReference<User>() {
         }) {
             @Override
-            protected void onSuccess(User result) {
+            protected void onSuccess(User result, boolean isCache) {
                 mMyAdapter.addAll(result.getList());
-            }
-
-            @Override
-            protected void onCache(User result) {
-                refreshLayout.setBackgroundColor(getResources().getColor(R.color.white));
-                mMyAdapter.addAll(result.getList());
+                if (isCache)
+                    refreshLayout.setBackgroundColor(getResources().getColor(R.color.white));
 
             }
+
         });
 
     }
